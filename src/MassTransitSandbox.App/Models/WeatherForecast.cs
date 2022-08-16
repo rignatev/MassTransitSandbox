@@ -1,4 +1,4 @@
-namespace Api;
+namespace MassTransitSandbox.App.Models;
 
 public class WeatherForecast
 {
