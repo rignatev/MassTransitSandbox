@@ -7,14 +7,19 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.14" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.16" />
         <PackageReference Include="Serilog.AspNetCore" Version="6.1.0" />
         <PackageReference Include="Serilog.Sinks.Seq" Version="5.2.2" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\MassTransit.Custom.Abstractions\MassTransit.Custom.Abstractions.csproj" />
       <ProjectReference Include="..\Shared.Contracts\Shared.Contracts.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Consumers\" />
     </ItemGroup>
 
 </Project>

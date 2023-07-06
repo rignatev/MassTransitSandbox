@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceB", "ServiceB\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Contracts", "Shared.Contracts\Shared.Contracts.csproj", "{67042881-037E-47E4-B83D-6C0513960B2B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.Custom.Abstractions", "MassTransit.Custom.Abstractions\MassTransit.Custom.Abstractions.csproj", "{3A6581B2-DC1E-48B3-A53A-41A3A7411906}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{67042881-037E-47E4-B83D-6C0513960B2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67042881-037E-47E4-B83D-6C0513960B2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67042881-037E-47E4-B83D-6C0513960B2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3A6581B2-DC1E-48B3-A53A-41A3A7411906}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3A6581B2-DC1E-48B3-A53A-41A3A7411906}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3A6581B2-DC1E-48B3-A53A-41A3A7411906}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3A6581B2-DC1E-48B3-A53A-41A3A7411906}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -1,8 +1,11 @@
 using System.Reflection;
 
 using MassTransit;
+using MassTransit.Custom.Abstractions.Interfaces;
 
 using Serilog;
+
+using ServiceA.Utils;
 
 using Shared.Contracts.Models.Rpc.ServiceB.TestCreate;
 
@@ -28,8 +31,9 @@ builder.Services.AddMassTransit(
     {
         busRegistrationConfigurator.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter(includeNamespace: true));
 
-        var entryAssembly = Assembly.GetEntryAssembly();
-        busRegistrationConfigurator.AddConsumers(entryAssembly);
+        var busConsumerTypes = Assembly.GetEntryAssembly()!.GetAllImplementations(typeof(IBusConsumer<>)).ToArray();
+
+        busRegistrationConfigurator.AddConsumers(busConsumerTypes);
         // busRegistrationConfigurator.AddConsumer<InfoLogMessageCreatedConsumer>(typeof(InfoLogMessageCreatedConsumerDefinition));
         // busRegistrationConfigurator.AddConsumer<ErrorLogMessageCreatedConsumer>(typeof(ErrorLogMessageCreatedConsumerDefinition));
 
@@ -41,6 +45,35 @@ builder.Services.AddMassTransit(
                 cfg.Host(
                     "localhost",
                     "/",
+                    h =>
+                    {
+                        h.Username("guest");
+                        h.Password("guest");
+                    }
+                );
+
+                cfg.ConfigureEndpoints(context);
+            }
+        );
+    }
+);
+
+builder.Services.AddMassTransit<IDomainBus>(
+    busRegistrationConfigurator =>
+    {
+        busRegistrationConfigurator.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter(includeNamespace: true));
+
+        var busConsumerTypes = Assembly.GetEntryAssembly()!.GetAllImplementations(typeof(IDomainBusConsumer<>)).ToArray();
+
+        busRegistrationConfigurator.AddConsumers(busConsumerTypes);
+        // busRegistrationConfigurator.AddConsumer<LogConsumer>(typeof(LogConsumerDefinition));
+
+        busRegistrationConfigurator.UsingRabbitMq(
+            (context, cfg) =>
+            {
+                cfg.Host(
+                    "localhost",
+                    "ServiceA",
                     h =>
                     {
                         h.Username("guest");
